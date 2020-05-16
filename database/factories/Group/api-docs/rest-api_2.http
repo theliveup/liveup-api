@@ -1,0 +1,62 @@
+POST http://localhost:8070/api/auth/register
+Cache-Control: no-cache
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "test3@example.com",
+  "password": "KHJ97ysahisa8a09yo8diaugs8b",
+  "name": "Ninja"
+}
+> {% client.global.set("auth_token", response.body.token); %}
+
+<> 2020-05-16T041343.422.json
+
+### Login
+POST http://localhost:8070/api/auth/login
+Cache-Control: no-cache
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "test3@example.com",
+  "password": "KHJ97ysahisa8a09yo8diaugs8b"
+}
+> {% client.global.set("auth_token", response.body.token); %}
+
+<> 2020-05-16T041416.200.json
+
+### Login
+POST http://localhost:8070/api/user/groups
+Authorization: Bearer {{auth_token}}
+Cache-Control: no-cache
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Family",
+  "description": "For Family"
+}
+> {% client.global.set("group_id", response.body.id); %}
+
+<> 2020-05-16T042052.201.json
+<> 2020-05-16T041933.201.json
+<> 2020-05-16T041922.422.json
+
+###
+GET http://localhost:8070/api/users/1/records?group_id={{group_id}}
+Authorization: Bearer {{auth_token}}
+Cache-Control: no-cache
+Accept: application/json
+
+<> 2020-05-16T042112.403.json
+<> 2020-05-16T042058.422.json
+<> 2020-05-16T042044.422.json
+<> 2020-05-16T041559.422.json
+<> 2020-05-16T041434.422.json
+<> 2020-05-16T041337.401.json
+<> 2020-05-16T040536.401.json
+<> 2020-05-16T040503.401.json
+
+###
+
